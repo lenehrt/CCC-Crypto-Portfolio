@@ -14,8 +14,79 @@
         <div id="app">
 
             <button @click="loadWallet">Connect to MetaMask</button>
-            <p> [[ ETHwalletAddress[0] ]] </p>
-            <button @click="loadCoins">LoadCoins</button>
+                <p> [[ walletAddress[0] ]] </p>
+            
+            
+            <div v-if="EthereumCoins">
+                <div v-for="coin in EthereumCoins">
+                    <p> Network: [[ coin.network ]]</p>
+                    <p> [[ coin.symbol ]] | [[ coin.balance]] = $[[ coin.balanceUSD ]] </p>
+                </div>
+            <p>-----------------------------------------------------</p>
+            </div> 
+            <div v-if="PolygonCoins">
+                <div v-for="coin in PolygonCoins">
+                    <p> Network: [[ coin.network ]]</p>
+                    <p> [[ coin.symbol ]] | [[ coin.balance]] = $[[ coin.balanceUSD ]] </p>
+                </div>
+            <p>-----------------------------------------------------</p>
+            </div>
+            <div v-if="OptimismCoins">
+                <div v-for="coin in OptimismCoins">
+                    <p> Network: [[ coin.network ]]</p>
+                    <p> [[ coin.symbol ]] | [[ coin.balance]] = $[[ coin.balanceUSD ]] </p>
+                </div>
+            <p>-----------------------------------------------------</p>
+            </div>
+            <div v-if="XdaiCoins">
+                <div v-for="coin in XdaiCoins">
+                    <p> Network: [[ coin.network ]]</p>
+                    <p> [[ coin.symbol ]] | [[ coin.balance]] = $[[ coin.balanceUSD ]] </p>
+                </div>
+            <p>-----------------------------------------------------</p>
+            </div>
+            <div v-if="BinanceCoins">
+                <div v-for="coin in BinanceCoins">
+                    <p> Network: [[ coin.network ]]</p>
+                    <p> [[ coin.symbol ]] | [[ coin.balance]] = $[[ coin.balanceUSD ]] </p>
+                </div>
+            <p>-----------------------------------------------------</p>
+            </div>
+            <div v-if="FantomCoins">
+                <div v-for="coin in FantomCoins">
+                    <p> Network: [[ coin.network ]]</p>
+                    <p> [[ coin.symbol ]] | [[ coin.balance]] = $[[ coin.balanceUSD ]] </p>
+                </div>
+            <p>-----------------------------------------------------</p>
+            </div> 
+            <div v-if="AvalancheCoins">
+                <div v-for="coin in AvalancheCoins">
+                    <p> Network: [[ coin.network ]]</p>
+                    <p> [[ coin.symbol ]] | [[ coin.balance]] = $[[ coin.balanceUSD ]] </p>
+                </div>
+            <p>-----------------------------------------------------</p>
+            </div>
+            <div v-if="ArbitrumCoins">
+                <div v-for="coin in ArbitrumCoins">
+                    <p> Network: [[ coin.network ]]</p>
+                    <p> [[ coin.symbol ]] | [[ coin.balance]] = $[[ coin.balanceUSD ]] </p>
+                </div>
+            <p>-----------------------------------------------------</p>
+            </div>
+            <div v-if="CeloCoins">
+                <div v-for="coin in CeloCoins">
+                    <p> Network: [[ coin.network ]]</p>
+                    <p> [[ coin.symbol ]] | [[ coin.balance]] = $[[ coin.balanceUSD ]] </p>
+                </div>
+            <p>-----------------------------------------------------</p>
+            </div>
+            <div v-if="HarmonyCoins">
+                <div v-for="coin in HarmonyCoins">
+                    <p> Network: [[ coin.network ]]</p>
+                    <p> [[ coin.symbol ]] | [[ coin.balance]] = $[[ coin.balanceUSD ]] </p>
+                </div>
+            <p>-----------------------------------------------------</p>
+            </div>
 
         
         </div>
@@ -34,3 +105,7 @@
         </body>
     
         </html>
+
+
+
+        
