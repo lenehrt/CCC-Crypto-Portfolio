@@ -3,36 +3,30 @@ const vm = new Vue({
     el: "#app",
     delimiters: ['[[', ']]'],
     data: {
-        walletAddress: '',
+        walletAddress: [],
         zapperAPIkey : '96e0cc51-a62e-42ca-acee-910ea7d2a241',
         listOfsupporteProtocals : [],
         stakedCoins : [],
         walletCoins : [],
         netWorth: 0,
-
-        // List of coins in the wallet
-
-        // EthereumCoins : '',
-        // PolygonCoins : '',
-        // OptimismCoins: '',
-        // XdaiCoins : '',
-        // BinanceCoins : '',
-        // FantomCoins : '',
-        // AvalancheCoins : '',
-        // ArbitrumCoins : '',
-        // CeloCoins : '',
-        // HarmonyCoins : '',
-        
-        // list of coins in vauls
-
+        userWallet: '',
     },
     methods: {
+
         
         getWallet: function() {
+            
+            if (ethereum.request()){
             ethereum.request({ method: 'eth_requestAccounts' }).then(response=>{ 
                 this.walletAddress = response
+                this.userWallet = this.walletAddress[0]
                 this.checkProtocal()
-            })
+            }) }
+            
+            else {
+                alert('No MetaMask extension deteted')
+            }
+
         },
         checkProtocal: function() {
             axios({
@@ -93,6 +87,7 @@ const vm = new Vue({
                                     
                                     if (!obj.symbol.startsWith('s')) {
                                         this.walletCoins.push(obj)
+                                        this.netWorth += obj.balanceUSD
                                     }
                             
                                 })
@@ -101,10 +96,12 @@ const vm = new Vue({
                                 if (!walletCoin[0].symbol.startsWith('s')) {
                                     
                                     this.walletCoins.push(walletCoin[0])
+                                    this.netWorth += walletCoin[0].balanceUSD
                                 }
                             }
 
                         } catch (error) {}
+                        
                         })
             })
 
@@ -124,22 +121,15 @@ const vm = new Vue({
                     }).then(response => {               
                         try {
                         let vaultCoin = response.data[ this.walletAddress[0] ].products[0].assets[0]
-                        this.stakedCoins.push(vaultCoin) }
+                        this.stakedCoins.push(vaultCoin) 
+                        this.netWorth += vaultCoin.balanceUSD
+                    }
                         catch (error) {}
                     
                     })
             })
         },
-        calNetWorth: function() {
-            console.log(this.netWorth)
 
-            this.walletCoins.forEach( value => {
-                this.netWorth += value.balanceUSD
-            })
-            this.stakedCoins.forEach( value => {
-                this.netWorth += value.balanceUSD
-            })
-        },
 
 
 
