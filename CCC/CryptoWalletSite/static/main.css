@@ -1,8 +1,8 @@
 :root {
 
     --main-bg-color: #22042e;
-    --main-text-color: white;
-    --second-text-color: gray;
+    --main-text-color: rgb(215, 205, 221);
+    --second-text-color: rgb(215, 205, 221);
     --second-bg-color: #784ffe;
 }
 
@@ -30,11 +30,10 @@
     overflow-x: hidden;
     background-image: linear-gradient(
     to right,
-    #22042e,
-    #330944,
-    #521869,
-    #6e278a,
-    #9e4fbd
+    #000000,
+    #190322,
+    #240530,
+    #230530
     );
     color: var(--second-text-color);
 
@@ -43,12 +42,11 @@
 #sidebar-wrapper {
     min-height: 100vh;
     margin-left: -15rem;
-    -webkit-transition: margin 0.25s ease-out;
-    -moz-transition: margin 0.25s ease-out;
-    -o-transition: margin 0.25s ease-out;
-    transition: margin 0.25s ease-out;
+    -webkit-transition: margin 0.75s ease-out;
+    -moz-transition: margin 0.75s ease-out;
+    -o-transition: margin 0.75s ease-out;
+    transition: margin 0.75s ease-out;
     overflow-x: hidden;
-    
 }
 
 #sidebar-wrapper .sidebar-heading {
@@ -104,9 +102,8 @@
 
 
 .btn {
-    color: #fff;
+    color: var(--second-text-color);
     background: linear-gradient(135deg, #312a6c, #852d91);
-    font-family: 'Comfortaa', cursive;
     font-size: 22px;
     font-weight: 500;
     padding: 10px 20px;
@@ -154,3 +151,8 @@
     .btn{ margin-bottom: 20px; }
 }
 
+.nav-item {
+
+background-color: transparent; 
+
+}

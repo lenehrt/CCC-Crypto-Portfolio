@@ -3,13 +3,14 @@ const vm = new Vue({
     el: "#app",
     delimiters: ['[[', ']]'],
     data: {
-        walletAddress: [],
+        walletAddress: '',
         zapperAPIkey : '96e0cc51-a62e-42ca-acee-910ea7d2a241',
         listOfsupporteProtocals : [],
         stakedCoins : [],
         walletCoins : [],
         netWorth: 0,
         userWallet: '',
+        networkBalance: [],
     },
     methods: {
 
@@ -56,6 +57,7 @@ const vm = new Vue({
 
                                             'network' : network,
                                             'app' : app,
+                                            'balance' : 0,
                                             
                                         })
                                     }
@@ -88,6 +90,11 @@ const vm = new Vue({
                                     if (!obj.symbol.startsWith('s')) {
                                         this.walletCoins.push(obj)
                                         this.netWorth += obj.balanceUSD
+                                        this.listOfsupporteProtocals.forEach( prot => {
+                                            if (prot.network === obj.network) {
+                                                prot.balance += obj.balanceUSD
+                                            }
+                                        })
                                     }
                             
                                 })
@@ -123,12 +130,19 @@ const vm = new Vue({
                         let vaultCoin = response.data[ this.walletAddress[0] ].products[0].assets[0]
                         this.stakedCoins.push(vaultCoin) 
                         this.netWorth += vaultCoin.balanceUSD
+
+                        this.listOfsupporteProtocals.forEach( prot => {
+                            if (prot.network === vaultCoin.network) {
+                                prot.balance += vaultCoin.balanceUSD
+                            }
+                        })
                     }
                         catch (error) {}
                     
                     })
             })
         },
+
 
 
 
