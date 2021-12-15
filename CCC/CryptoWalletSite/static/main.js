@@ -12,9 +12,14 @@ const vm = new Vue({
         userWallet: '',
         networkBalance: [],
     },
+
+    created: function(){
+        
+        this.getWallet()
+    },
+
     methods: {
 
-        
         getWallet: function() {
             
             if (ethereum.request()){
@@ -359,5 +364,6 @@ const vm = new Vue({
     //     })
     // },
 
-    }
+    },
+
 })

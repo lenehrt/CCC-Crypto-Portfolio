@@ -156,3 +156,36 @@
 background-color: transparent; 
 
 }
+
+.centerbutton {
+    display : flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    background-image: linear-gradient(
+    to right,
+    #000000,
+    #190322,
+    #240530,
+    #230530
+    );
+    color: var(--second-text-color);
+
+}
+
+.leo {
+    display : flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    background-image: linear-gradient(
+    to right,
+    #180220,
+    #240530,
+    #230530
+    );
+    color: var(--second-text-color);
+
+}

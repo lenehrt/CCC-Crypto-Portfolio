@@ -10,9 +10,11 @@
             <link rel="stylesheet" href="/static/main.css">
         </head>
         <body>
+        
             <!-- authentications -->
                 {%csrf_token%}
                 {% if user.is_authenticated %}
+
                 <!-- vue.js -->
                     <div id="app">
                         <div class="d-flex" id="wrapper">
@@ -147,9 +149,7 @@
                                                                 </div>
                                                             <!-- end of first card -->
                                                             <!-- second card -->
-                                                                
                                                             <div class="tab-pane fade show active" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-1">
-                                                                    
                                                                     <h3 class="fs-4 mb-3">Networks</h3>
                                                                     <div class="col">
                                                                         <table class="table table-bordered table-hover"  style="border-color:rgb(215, 205, 221); color: rgb(215, 205, 221)">
@@ -173,13 +173,67 @@
                             <!-- end of page content -->
                         </div>
                     </div>
-                <!-- end of vue.js -->
-                
-                {% else %}
-                <h1>Welcome, visitor!</h1>
-                <p>You are not logged in. <a href="{% url 'login' %}">Login</a> <a href="{% url 'users:signup' %}">Sign Up</a></p>
-                {% endif %}
-            <!-- end of authetification -->
+                <!-- end of vue.js -->  
+        {% else %}
+        <!-- modal login/signup  -->
+        
+
+            <div class="centerbutton">
+            <button type="button" class="btn btn-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#loginModal">Enter App</button>
+            </div>
+            <!-- login modal -->
+                <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered"> 
+                        <div class="modal-content rounded border leo"> 
+                            <div class="modal-header"> 
+                                <h5 class="modal-title" id="loginToggleLabel">WELCOME</h5>
+                            </div>
+                            <div class="modal-body">
+                                <form action="/login/" method="post">
+                                    {% csrf_token %}
+                                    <p>
+                                        <label for="id_username">Username:</label>
+                                        <input type='text' name='username' autofocus autocapitalize="none" autocomplete="username" id="id_username" maxlength="150" required>
+                                    </p>
+                                        <hr>
+                                    <p>
+                                        <label for="id_password">Password:</label>
+                                        <input type='password' name='password' autocomplete="current-password" id="id_password" required>
+                                    </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary" >Login</button>
+                                </form>
+                                <button class="btn btn-primary btn-sm" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Sign Up</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!-- end of login modal -->
+            <!-- signup modal -->
+                <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalToggleLabel2">Sign Up</h5>
+                            </div>
+                            <div class="modal-body">
+                                <form action="" method="post">
+                                    {% csrf_token %}
+                                    {{ form.as_p }}
+                            </div>
+                            <div class="modal-footer">
+                            <button type="submit" value="Sign Up" class="btn btn-secondary btn-sm" >Sign Up</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!-- end of signup modal -->
+        <!--end of modal login/signup  -->
+        {% endif %}
+        <!-- end of authetification -->
+    
             <!-- scripts -->
                 <script src="https://unpkg.com/vue"></script>
                 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
