@@ -8,6 +8,10 @@ const vm = new Vue({
         listOfsupporteProtocals : [],
         stakedCoins : [],
         walletCoins : [],
+        history1 : [],
+        history2 : [],
+        history3 : [],
+        history4 : [],
         netWorth: 0,
         userWallet: '',
         networkBalance: [],
@@ -71,6 +75,7 @@ const vm = new Vue({
                     } catch (error) {}
                     this.getWalletBalance()
                     this.getStakedBalance()
+                    this.getHistoryNetwork()
                 })
         },
         getWalletBalance: function() {
@@ -147,6 +152,94 @@ const vm = new Vue({
                     })
             })
         },
+
+        
+        
+        
+        
+        // getHistoryNetwork: function() {
+            
+        //     this.history1 = []
+
+        //     this.listOfsupporteProtocals.forEach( protocal => {
+                
+        //         axios({
+        //             method: 'get',
+        //             url: `https://api.zapper.fi/v1/transactions`,
+        //             params: {
+        //                 address : this.walletAddress[0],
+        //                 addresses : this.walletAddress,
+        //                 network : protocal.network,
+        //                 api_key: '96e0cc51-a62e-42ca-acee-910ea7d2a241',
+        //             },
+        //             }).then(response => {
+        //                 this.history1.push(...response.data.data)
+        //             }).catch(error => {})
+        //     })
+
+        //     console.log('done....')
+
+
+        // },
+        getHistoryNetwork: function() {
+            
+            this.history1 = []
+            let promises = []
+
+            this.listOfsupporteProtocals.forEach( protocal => {
+                promises.push(
+                axios({
+                    method: 'get',
+                    url: `https://api.zapper.fi/v1/transactions`,
+                    params: {
+                        address : this.walletAddress[0],
+                        addresses : this.walletAddress,
+                        network : protocal.network,
+                        api_key: '96e0cc51-a62e-42ca-acee-910ea7d2a241',
+                    },
+                    }) 
+                )                
+            })
+
+            Promise.allSettled(promises)
+            .then(results => {
+                
+                results.forEach( each => {
+                
+                    if ( each.value ) {
+                    this.history1.push(...each.value.data.data)
+                    }
+            })
+
+            })
+
+
+        },
+
+
+        
+        // getHistoryTransactions: function() {
+        //     this.history3 = []
+
+        //     for(var i = 0; i < this.history2.length; i++) {
+        //         for(var j = 0; j < this.history2[i].length; j++) {
+        //             this.history3.push(this.history2[i][j]);
+        //         }
+        //     }
+
+        //     // this.history2.forEach ( network => {
+        //     //     let transaction = network.data
+        //     //     this.history3.push(transaction)
+        //     // })
+        //     // this.history3.forEachg ( netnet => {
+        //     //     let transtrans = netnet
+        //     //     this.history4.push(transtrans)
+        //     // })
+
+        // }
+
+
+        
 
 
 
