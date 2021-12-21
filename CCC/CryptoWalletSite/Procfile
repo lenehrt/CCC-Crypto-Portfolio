@@ -1,2 +1,0 @@
-web: cd CCC && cd Cryptowalletsite && gunicorn Cryptowalletsite.wsgi
-release: cd CCC && cd Cryptowalletsite && python manage.py migrate
