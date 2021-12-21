@@ -112,8 +112,23 @@
                                                                             <table class="table table-bordered table-hover"  style="border-color:rgb(215, 205, 221); color: rgb(215, 205, 221)">
                                                                                 <tbody v-for="coin in walletCoins">
                                                                                     <tr>
-                                                                                        <td >[[ coin.symbol ]] $[[ coin.price.toLocaleString(undefined, { minimumFractionDigits: 2,  maximumFractionDigits: 2 }) ]]</td>
-                                                                                        <td >[[ coin.balance.toFixed(3)]] $[[ coin.balanceUSD.toLocaleString(undefined, { minimumFractionDigits: 2,  maximumFractionDigits: 2 }) ]] </td>
+                                                                                        <td class= "entirething" > 
+                                                                                            
+                                                                                            <div class= "imagepart"><img :src='[[ coin.img ]]' style="width: auto; height: 50px;"></div>
+                                                                                            <div class= "textpart">  
+                                                                                                
+                                                                                                <div class= 'textboldparttop'>
+                                                                                                    <div class= "innertextbold">[[ coin.symbol ]]</div>
+                                                                                                    <div class= "innertextbold">$[[ coin.balanceUSD.toLocaleString(undefined, { minimumFractionDigits: 2,  maximumFractionDigits: 2 }) ]]</div>
+                                                                                                </div>
+                                                                                                <div class= 'textboldpartbot'>
+                                                                                                    <div>$[[ coin.price.toLocaleString(undefined, { minimumFractionDigits: 2,  maximumFractionDigits: 2 }) ]]</div>
+                                                                                                    <div>[[ coin.balance.toFixed(3)]]</div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class= "arrow">→</div>
+                                                                                            
+                                                                                        </td>
                                                                                     </tr>
                                                                                 </tbody>
                                                                             </table>
@@ -125,8 +140,23 @@
                                                                             <table class="table table-bordered table-hover"  style="border-color:rgb(215, 205, 221); color: rgb(215, 205, 221)">
                                                                                 <tbody v-for="coin in stakedCoins">
                                                                                     <tr>
-                                                                                        <td >[[ coin.symbol ]] $[[ coin.price.toLocaleString(undefined, { minimumFractionDigits: 2,  maximumFractionDigits: 2 }) ]]</td>
-                                                                                        <td >[[ coin.balance.toFixed(3)]] $[[ coin.balanceUSD.toLocaleString(undefined, { minimumFractionDigits: 2,  maximumFractionDigits: 2 }) ]] </td>
+                                                                                        <td class= "entirething" > 
+                                                                                            
+                                                                                            <div class= "imagepart"><img :src='[[ coin.img ]]' style="width: auto; height: 50px;"></div>
+                                                                                            <div class= "textpart">  
+                                                                                                
+                                                                                                <div class= 'textboldparttop'>
+                                                                                                    <div class= "innertextbold">[[ coin.symbol ]]</div>
+                                                                                                    <div class= "innertextbold">$[[ coin.balanceUSD.toLocaleString(undefined, { minimumFractionDigits: 2,  maximumFractionDigits: 2 }) ]]</div>
+                                                                                                </div>
+                                                                                                <div class= 'textboldpartbot'>
+                                                                                                    <div>$[[ coin.price.toLocaleString(undefined, { minimumFractionDigits: 2,  maximumFractionDigits: 2 }) ]]</div>
+                                                                                                    <div>[[ coin.balance.toFixed(3)]]</div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class= "arrow">→</div>
+                                                                                            
+                                                                                        </td>
                                                                                     </tr>
                                                                                 </tbody>
                                                                             </table>
@@ -138,8 +168,21 @@
                                                                             <table class="table table-bordered table-hover"  style="border-color:rgb(215, 205, 221); color: rgb(215, 205, 221)">
                                                                                 <tbody v-for="coin in listOfsupporteProtocals">
                                                                                     <tr>
-                                                                                        <td >[[ coin.network[0].toUpperCase() + coin.network.substring(1) ]]</td>
-                                                                                        <td >$[[ coin.balance.toLocaleString(undefined, { minimumFractionDigits: 2,  maximumFractionDigits: 2 }) ]] </td>
+                                                                                        <td class= "entirething" > 
+                                                                                            
+                                                                                            <div class= "imagepart"><img :src='[[ coin.img ]]' style="width: auto; height: 50px;"></div>
+                                                                                            <div class= "textpart">  
+                                                                                                
+                                                                                                <div class= 'textboldparttop'>
+                                                                                                    <div class= "innertextbold">[[ coin.network[0].toUpperCase() + coin.network.substring(1) ]]</div>
+                                                                                                </div>
+                                                                                                <div class= 'textboldpartbot'>
+                                                                                                    <div>$[[ coin.balance.toLocaleString(undefined, { minimumFractionDigits: 2,  maximumFractionDigits: 2 }) ]]</div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class= "arrow">→</div>
+                                                                                        </td>
+
                                                                                     </tr>
                                                                                 </tbody>
                                                                             </table>
@@ -153,9 +196,28 @@
                                                                     <h3 class="fs-4 mb-3">History</h3>
                                                                     <div class="col">
                                                                         <table class="table table-bordered table-hover"  style="border-color:rgb(215, 205, 221); color: rgb(215, 205, 221)">
-                                                                            <tbody>
+                                                                            <tbody v-for="coin in historyTransactions">
                                                                                 <tr>
-                                                                                    <td></td>
+                                                                                    <td> 
+                                                                                        <h5>[[ new Date(coin.timeStamp * 1000).toDateString().slice(4, 99) ]]</h5>
+                                                                                        
+                                                                                        <p v-if="coin.name === 'Receive'"> 
+                                                                                            Received
+                                                                                            from
+                                                                                            [[ coin.from.slice(0, 6) ]]...   -->  +[[ parseFloat(coin.amount).toLocaleString(undefined, { minimumFractionDigits: 2,  maximumFractionDigits: 2 }) ]] [[ coin.symbol]] </p>
+                                                                                        
+                                                                                        <p v-if='coin.name === "Send"'>
+                                                                                            Sent
+                                                                                            to
+                                                                                            [[ userWallet.slice(0, 6) ]]... -->  -[[ parseFloat(coin.amount).toLocaleString(undefined, { minimumFractionDigits: 2,  maximumFractionDigits: 2 }) ]] [[ coin.symbol]]   
+                                                                                        </p>
+                                                                                        
+                                                                                        <p v-if='coin.name === "Exchange"'>
+                                                                                            Exchanged
+                                                                                            -[[ parseFloat(coin.subTransactions[1].amount).toLocaleString(undefined, { minimumFractionDigits: 2,  maximumFractionDigits: 2 }) ]] [[ coin.subTransactions[1].symbol ]] 
+                                                                                            --> +[[ parseFloat(coin.subTransactions[0].amount).toLocaleString(undefined, { minimumFractionDigits: 2,  maximumFractionDigits: 2 }) ]] [[ coin.subTransactions[0].symbol ]]
+                                                                                        </p>
+                                                                                    </td>
                                                                                 </tr>
                                                                             </tbody>
                                                                         </table>

@@ -189,3 +189,48 @@ background-color: transparent;
     color: var(--second-text-color);
 
 }
+
+.entirething {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.imagepart {
+    margin: 5px;
+}
+
+.textpart {
+    display : flex;
+    width: 85%;
+    flex-direction: column;
+    align-content: space-between;
+    align-items: stretch;
+    justify-content: space-around;
+}
+
+.textboldparttop {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-weight: bold;
+    align-items: stretch;
+    font-size: larger;
+
+}
+
+.textboldpartbot {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+
+}
+
+.arrow {
+    display : flex;
+    font-size: xx-large;
+    justify-content: flex-end;
+    align-items: center;
+    width: 10%;
+}
