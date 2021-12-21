@@ -22,8 +22,8 @@
                                 <div class="bg rounded border-end border-1 border-secondary" id="sidebar-wrapper">
                                     <!-- top button -->
                                         <div class="sidebar-heading text-center">
-                                            <button class="btn btn-lg" role="button" v-if="walletAddress.length === 0" @click="getWallet">Connect MetaMask</button>
-                                            <button class="btn btn-lg" role="button" disabled v-else=> <img src="/static/images/metamask.png" width="50" alt="Wallet Connected"> Connected </button>
+                                            <button class="leobutton" role="button" v-if="walletAddress.length === 0" @click="getWallet">Connect MetaMask</button>
+                                            <button class="leobutton" role="button" disabled v-else=> <img src="/static/images/metamask.png" width="50" alt="Wallet Connected"> Connected </button>
                                         </div>
                                     <!-- end of button -->
                                     <!-- side menu bar items -->
@@ -77,10 +77,11 @@
                                             <!-- net worth box -->
                                                 <div class="row g-3 my-2 mb-4">
                                                     <div class="col-md-3">
-                                                        <div class="p-3 d-flex justify-content-around align-items-center rounded border border-2" style="border-color: rgba(215, 205, 221, 0.336)" >
+                                                        <div class="p-3 d-flex justify-content-around align-items-center rounded border border-2 networthbox" style="border-color: rgba(215, 205, 221, 0.336)" >
                                                             <div>
                                                                 <h3 class="fs-2">$[[ netWorth.toLocaleString(undefined, { minimumFractionDigits: 2,  maximumFractionDigits: 2 }) ]]</h3>
-                                                                <p class="fs-5">Net Worth</p>
+                                                                <p class="fs-5">Net Worth</p> 
+                                                                <!-- <p> <div id="container" style="height: 400px"></div></p> -->
                                                             </div>
                                                             <i class="fas fa-cash-register fs-1 primary-text border rounded-full p-3" style="color: rgb(215, 205, 221)"></i>
                                                         </div>
@@ -113,8 +114,10 @@
                                                                                 <tbody v-for="coin in walletCoins">
                                                                                     <tr>
                                                                                         <td class= "entirething" > 
+                                                                        
                                                                                             
-                                                                                            <div class= "imagepart"><img :src='[[ coin.img ]]' style="width: auto; height: 50px;"></div>
+                                                                                            <div v-if="coin.img" class= "imagepart"><img :src='[[ coin.img ]]' style="width: auto; height: 50px;"></div>
+                                                                                            <div v-if="!coin.img" class= "imagepart"> <img :src='[[ networkImages[coin.network] ]]' style="width: auto; height: 50px;"></div>
                                                                                             <div class= "textpart">  
                                                                                                 
                                                                                                 <div class= 'textboldparttop'>
@@ -142,8 +145,9 @@
                                                                                     <tr>
                                                                                         <td class= "entirething" > 
                                                                                             
-                                                                                            <div class= "imagepart"><img :src='[[ coin.img ]]' style="width: auto; height: 50px;"></div>
-                                                                                            <div class= "textpart">  
+                                                                                            <div v-if="coin.img" class= "imagepart"><img :src='[[ coin.img ]]' style="width: auto; height: 50px;"></div>
+                                                                                            <div v-if="!coin.img" class= "imagepart"> <img :src='[[ networkImages[coin.network] ]]' style="width: auto; height: 50px;"></div>
+                                                                                            <div class= "textpart">   
                                                                                                 
                                                                                                 <div class= 'textboldparttop'>
                                                                                                     <div class= "innertextbold">[[ coin.symbol ]]</div>
@@ -170,7 +174,8 @@
                                                                                     <tr>
                                                                                         <td class= "entirething" > 
                                                                                             
-                                                                                            <div class= "imagepart"><img :src='[[ coin.img ]]' style="width: auto; height: 50px;"></div>
+                                                                                            <div v-if="coin.img" class= "imagepart"><img :src='[[ coin.img ]]' style="width: auto; height: 50px;"></div>
+                                                                                            <div v-if="!coin.img" class= "imagepart"> <img :src='[[ networkImages[coin.network] ]]' style="width: auto; height: 50px;"></div>
                                                                                             <div class= "textpart">  
                                                                                                 
                                                                                                 <div class= 'textboldparttop'>
@@ -196,20 +201,22 @@
                                                                     <h3 class="fs-4 mb-3">History</h3>
                                                                     <div class="col">
                                                                         <table class="table table-bordered table-hover"  style="border-color:rgb(215, 205, 221); color: rgb(215, 205, 221)">
+                                                                            
+                                            
                                                                             <tbody v-for="coin in historyTransactions">
                                                                                 <tr>
                                                                                     <td> 
                                                                                         <h5>[[ new Date(coin.timeStamp * 1000).toDateString().slice(4, 99) ]]</h5>
                                                                                         
                                                                                         <p v-if="coin.name === 'Receive'"> 
-                                                                                            Received
-                                                                                            from
-                                                                                            [[ coin.from.slice(0, 6) ]]...   -->  +[[ parseFloat(coin.amount).toLocaleString(undefined, { minimumFractionDigits: 2,  maximumFractionDigits: 2 }) ]] [[ coin.symbol]] </p>
+                                                                                            Received +[[ parseFloat(coin.amount).toLocaleString(undefined, { minimumFractionDigits: 2,  maximumFractionDigits: 2 }) ]] [[ coin.symbol]]
+                                                                                            <-- from 
+                                                                                            [[ coin.from.slice(0, 6) ]]...  </p>
                                                                                         
                                                                                         <p v-if='coin.name === "Send"'>
-                                                                                            Sent
-                                                                                            to
-                                                                                            [[ userWallet.slice(0, 6) ]]... -->  -[[ parseFloat(coin.amount).toLocaleString(undefined, { minimumFractionDigits: 2,  maximumFractionDigits: 2 }) ]] [[ coin.symbol]]   
+                                                                                            Sent -[[ parseFloat(coin.amount).toLocaleString(undefined, { minimumFractionDigits: 2,  maximumFractionDigits: 2 }) ]] [[ coin.symbol]]
+                                                                                            to --> 
+                                                                                            [[ coin.destination.slice(0, 6) ]]...   
                                                                                         </p>
                                                                                         
                                                                                         <p v-if='coin.name === "Exchange"'>
@@ -240,7 +247,7 @@
         
 
             <div class="centerbutton">
-            <button type="button" class="btn btn-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#loginModal">Enter App</button>
+            <button type="button" class="leobutton" data-bs-toggle="modal" data-bs-target="#loginModal">Enter App</button>
             </div>
             <!-- login modal -->
                 <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
@@ -263,9 +270,9 @@
                                     </p>
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary" >Login</button>
+                                <button type="submit" class="leobutton" >Login</button>
                                 </form>
-                                <button class="btn btn-primary btn-sm" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Sign Up</button>
+                                <button class="leobutton" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Sign Up</button>
                             </div>
                         </div>
                     </div>
@@ -284,7 +291,7 @@
                                     {{ form.as_p }}
                             </div>
                             <div class="modal-footer">
-                            <button type="submit" value="Sign Up" class="btn btn-secondary btn-sm" >Sign Up</button>
+                            <button type="submit" value="Sign Up" class="leobutton" >Sign Up</button>
                                 </form>
                             </div>
                         </div>
@@ -298,15 +305,30 @@
             <!-- scripts -->
                 <script src="https://unpkg.com/vue"></script>
                 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-                <script src="/static/main.js"></script>
+            
                 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.js"></script>
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+                
+                <script src="https://code.highcharts.com/stock/highstock.js"></script>
+<script src="https://code.highcharts.com/stock/modules/data.js"></script>
+<script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/stock/modules/export-data.js"></script>
+
+
+
+
+
+                <script src="/static/main.js"></script>
                 <script>
                         var el = document.getElementById("wrapper");
                         var toggleButton = document.getElementById("menu-toggle");
                             toggleButton.onclick = function () {
                             el.classList.toggle("toggled");
                             };
+
+
+
+
                     </script>
             <!-- end of scripts -->
         </body>

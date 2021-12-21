@@ -101,7 +101,7 @@
 
 
 
-.btn {
+.leobutton {
     color: var(--second-text-color);
     background: linear-gradient(135deg, #312a6c, #852d91);
     font-size: 22px;
@@ -113,14 +113,14 @@
     position: relative;
     transition: all 0.3s cubic-bezier(0.02, 0.01, 0.47, 1);
 }
-.btn:hover {
+.leobutton:hover {
     color: #fff;
     border: none;
     box-shadow: 0 0 10px rgba(0,0,0,0.3);
     animation: rotate 0.7s ease-in-out both;
 }
-.btn:before,
-.btn:after {
+.leobutton:before,
+.leobutton:after {
     content: '';
     background: #fff;
     width: 100px;
@@ -134,12 +134,12 @@
     z-index: -1;
     transition: all 0.15s cubic-bezier(0.02, 0.01, 0.47, 1);
 }
-.btn:hover:before,
-.btn:hover:after {
+.leobutton:hover:before,
+.leobutton:hover:after {
     opacity: 0.15;
 }
-.btn:hover:before{ transform: translate3d(50%, 0, 0) scale(0.9); }
-.btn:hover:after{ transform: translate(50%, 0) scale(1.1); }
+.leobutton:hover:before{ transform: translate3d(50%, 0, 0) scale(0.9); }
+.leobutton:hover:after{ transform: translate(50%, 0) scale(1.1); }
 @keyframes rotate{
     0%{ transform: rotate(0deg); }
     25%{ transform: rotate(3deg); }
@@ -148,7 +148,7 @@
     100%{ transform: rotate(0deg); }
 }
 @media only screen and (max-width: 767px){
-    .btn{ margin-bottom: 20px; }
+    .leobutton{ margin-bottom: 20px; }
 }
 
 .nav-item {
@@ -234,3 +234,4 @@ background-color: transparent;
     align-items: center;
     width: 10%;
 }
+
