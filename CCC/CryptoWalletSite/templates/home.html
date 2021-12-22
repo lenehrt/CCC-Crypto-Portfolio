@@ -28,11 +28,11 @@
                                     <!-- end of button -->
                                     <!-- side menu bar items -->
                                         <div class="list-group list-group-flush my-3">
-                                            <a href="#" class="list-group-item list-group-item-action bg-transparent second-text active">
+                                            <a href="/home" class="list-group-item list-group-item-action bg-transparent second-text active">
                                                 <i class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
-                                            <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                                            <a href="/compare" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                                                 <i class="fas fa-project-diagram me-2"></i>Compare</a>
-                                            <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                                            <a href="/news" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                                                 <i class="fas fa-chart-line me-2"></i>News</a>
                                         </div>
                                     <!-- end of side menu bar items -->
@@ -72,8 +72,10 @@
                                             <!-- end of drop down menu on nav bar -->
                                         </nav>
                                     <!-- end of nav bar -->
+                
                                     <!-- content after navbar -->
                                         <div class="container-fluid px-4">
+                                            {% block content %}
                                             <!-- net worth box -->
                                                 <div class="row g-3 my-2 mb-4">
                                                     <div class="col-md-3">
@@ -88,6 +90,7 @@
                                                     </div>
                                                 </div>
                                             <!-- beginning of cards -->
+                                            
                                                 <div v-if="!(walletAddress.length === 0)" class="card bg-transparent">
                                                     <!-- cards nav  -->
                                                         <ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
@@ -110,7 +113,7 @@
                                                                         <!-- walletCoins -->
                                                                         <h3 class="fs-4 mb-3">Wallet</h3>
                                                                         <div class="col">
-                                                                            <table class="table table-bordered table-hover"  style="border-color:rgb(215, 205, 221); color: rgb(215, 205, 221)">
+                                                                            <table class="table table-bordered"  style="border-color:rgb(215, 205, 221); color: rgb(215, 205, 221)">
                                                                                 <tbody v-for="coin in walletCoins">
                                                                                     <tr>
                                                                                         <td class= "entirething" > 
@@ -226,15 +229,18 @@
                                                                                         </p>
                                                                                     </td>
                                                                                 </tr>
-                                                                            </tbody>
+                                                                            </tbody> 
                                                                         </table>
                                                                     </div>
                                                                 </div>
                                                             <!-- end of second card -->
+                                                            
                                                         </div>
                                                     <!-- end of cards content -->
                                                 </div>
+                                                {% endblock content %}
                                             <!-- end of cards beginning of cards -->
+                                            
                                         </div>
                                     <!--end of content after navbar -->
                                 </div>

@@ -2,7 +2,7 @@ from django.urls import reverse_lazy
 from django.views.generic.base import RedirectView
 from django.views.generic.edit import CreateView
 from django.contrib.auth import login, authenticate
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.http import HttpResponseRedirect
 
 from .forms import CustomUserCreationForm
@@ -11,7 +11,6 @@ class SignUpView(CreateView):
     form_class = CustomUserCreationForm
     success_url = reverse_lazy('home')
     template_name = 'registration/signup.html'
-
 
 class HomeWithForm(CreateView):
     form_class = CustomUserCreationForm
@@ -36,3 +35,13 @@ def SignIN(request):
             login(request , user)
 
     return redirect('home')
+
+class CompareWithForm(CreateView):
+    form_class = CustomUserCreationForm
+    success_url = reverse_lazy('compare')
+    template_name = 'compare.html'
+
+class NewsWithForm(CreateView):
+    form_class = CustomUserCreationForm
+    success_url = reverse_lazy('news')
+    template_name = 'news.html'

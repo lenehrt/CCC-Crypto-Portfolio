@@ -27,7 +27,7 @@ const vm = new Vue({
     },
     // created: function(){
         
-    //     this.loadCoins()
+    //     this.getWallet()
     // },
     methods: {
         getWallet: function() {
