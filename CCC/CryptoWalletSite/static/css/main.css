@@ -1,0 +1,237 @@
+:root {
+
+    --main-bg-color: #22042e;
+    --main-text-color: rgb(215, 205, 221);
+    --second-text-color: rgb(215, 205, 221);
+    --second-bg-color: #784ffe;
+}
+
+.primary-text {
+    color: var(--main-text-color);
+}
+
+.second-text {
+    color: var(--second-text-color);
+}
+
+.primary-bg {
+    background-color: var(--main-bg-color);
+}
+
+.secondary-bg {
+    background-color: var(--second-bg-color);
+}
+
+.rounded-full {
+    border-radius: 100%;
+}
+
+#wrapper {
+    overflow-x: hidden;
+    background-image: linear-gradient(
+    to right,
+    #000000,
+    #190322,
+    #240530,
+    #230530
+    );
+    color: var(--second-text-color);
+
+}
+
+#sidebar-wrapper {
+    min-height: 100vh;
+    margin-left: -15rem;
+    -webkit-transition: margin 0.75s ease-out;
+    -moz-transition: margin 0.75s ease-out;
+    -o-transition: margin 0.75s ease-out;
+    transition: margin 0.75s ease-out;
+    overflow-x: hidden;
+}
+
+#sidebar-wrapper .sidebar-heading {
+    padding: 0.875rem 1.25rem;
+    font-size: 1.2rem;
+}
+
+#sidebar-wrapper .list-group {
+    width: 15rem;
+}
+
+#page-content-wrapper {
+    min-width: 100vw;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    margin-left: 0;
+}
+
+#menu-toggle {
+    cursor: pointer;
+}
+
+.list-group-item {
+    border: none;
+    padding: 20px 30px;
+}
+
+.list-group-item.active {
+    background-color: transparent;
+    color: var(--second-bg-color);
+    font-weight: bold;
+    border: none;
+}
+
+
+@media (min-width: 768px) {
+    #sidebar-wrapper {
+    margin-left: 0;
+    }
+
+    #page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+    margin-left: -15rem;
+    }
+}
+
+
+
+
+.leobutton {
+    color: var(--second-text-color);
+    background: linear-gradient(135deg, #312a6c, #852d91);
+    font-size: 22px;
+    font-weight: 500;
+    padding: 5px 20px;
+    border: none;
+    border-radius: 25px;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.02, 0.01, 0.47, 1);
+}
+.leobutton:hover {
+    color: #fff;
+    border: none;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    animation: rotate 0.7s ease-in-out both;
+}
+.leobutton:before,
+.leobutton:after {
+    content: '';
+    background: #fff;
+    width: 100px;
+    height: 100px;
+    border-radius: 30%;
+    opacity: 0;
+    transform: translate(100%, -25%) translate3d(0, 0, 0);
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    transition: all 0.15s cubic-bezier(0.02, 0.01, 0.47, 1);
+}
+.leobutton:hover:before,
+.leobutton:hover:after {
+    opacity: 0.15;
+}
+.leobutton:hover:before{ transform: translate3d(50%, 0, 0) scale(0.9); }
+.leobutton:hover:after{ transform: translate(50%, 0) scale(1.1); }
+@keyframes rotate{
+    0%{ transform: rotate(0deg); }
+    25%{ transform: rotate(3deg); }
+    50%{ transform: rotate(-3deg); }
+    75%{ transform: rotate(1deg); }
+    100%{ transform: rotate(0deg); }
+}
+@media only screen and (max-width: 767px){
+    .leobutton{ margin-bottom: 20px; }
+}
+
+.nav-item {
+
+background-color: transparent; 
+
+}
+
+.centerbutton {
+    display : flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    background-image: linear-gradient(
+    to right,
+    #000000,
+    #190322,
+    #240530,
+    #230530
+    );
+    color: var(--second-text-color);
+
+}
+
+.leo {
+    display : flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    background-image: linear-gradient(
+    to right,
+    #180220,
+    #240530,
+    #230530
+    );
+    color: var(--second-text-color);
+
+}
+
+.entirething {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.imagepart {
+    margin: 5px;
+}
+
+.textpart {
+    display : flex;
+    width: 85%;
+    flex-direction: column;
+    align-content: space-between;
+    align-items: stretch;
+    justify-content: space-around;
+}
+
+.textboldparttop {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-weight: bold;
+    align-items: stretch;
+    font-size: larger;
+
+}
+
+.textboldpartbot {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+
+}
+
+.arrow {
+    display : flex;
+    font-size: xx-large;
+    justify-content: flex-end;
+    align-items: center;
+    width: 10%;
+}
+

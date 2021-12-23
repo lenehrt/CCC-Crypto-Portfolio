@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Crypto Wallet</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="/static/css/market.css">
+</head>
+
+<body>
+
+    <!-- authentications -->
+    {%csrf_token%}
+    {% if user.is_authenticated %}
+
+    <!-- vue.js -->
+    <div id="app">
+        <div class="d-flex" id="wrapper">
+            <!-- side menu bar -->
+            <div class="bg rounded border-end border-1 border-secondary" id="sidebar-wrapper">
+                <!-- top button -->
+                <div class="sidebar-heading text-center">
+                    <p></p>
+                    <P></P>
+                </div>
+                <!-- end of button -->
+                <!-- side menu bar items -->
+                <div class="list-group list-group-flush my-3">
+                    <a href="/home" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                        <i class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
+                    <a href="/market" class="list-group-item list-group-item-action bg-transparent second-text active">
+                        <i class="fas fa-project-diagram me-2"></i>Market</a>
+                    <a href="/news" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                        <i class="fas fa-chart-line me-2"></i>News</a>
+                </div>
+                <!-- end of side menu bar items -->
+            </div>
+            <!-- end of side menu bar -->
+            <!-- page content -->
+            <div id="page-content-wrapper">
+                <!-- navbar -->
+                <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
+                    <!-- user wallet address -->
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
+                    </div>
+                    <!-- end of user wallet address -->
+                    <!-- navbar button to hide side menu bar -->
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <!-- end of navbar button to hide side menu bar -->
+                    <!-- drop down menu on nav bar -->
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle second-text fw-bold"
+                                    style="color: rgb(215, 205, 221)" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-user me-3"></i> {{ user.username }}
+                                </a>
+                                <!-- items on navbar on drop down menu -->
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                                </ul>
+                                <!-- end of items on navbar on drop down menu -->
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- end of drop down menu on nav bar -->
+                </nav>
+                <!-- end of nav bar -->
+
+                <!-- content after navbar -->
+                <div class="container-fluid px-4">
+                    <!-- cards nav  -->
+                    <div class="card bg-transparent">
+
+                        <ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
+                            <li class="nav-item " role="presentation">
+                                <a class="nav-link text-muted bg-transparent active" id="ex1-tab-1"
+                                    data-mdb-toggle="tab" href="#ex1-tabs-1" role="tab" aria-controls="ex1-tabs-1"
+                                    aria-selected="true">Coins</a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link text-muted bg-transparent" id="ex1-tab-2" data-mdb-toggle="tab"
+                                    href="#ex1-tabs-2" role="tab" aria-controls="ex1-tabs-2" aria-selected="false"
+                                    @click="trendingCoins">Trending</a>
+                            </li>
+
+                        </ul>
+
+                        <!-- end of cards nav  -->
+                        <!-- cards content -->
+                        <div class="tab-content" id="ex1-content">
+
+                            <!-- first card -->
+                            <div class="tab-pane fade show active" id="ex1-tabs-1" role="tabpanel"
+                                aria-labelledby="ex1-tab-1">
+                                <input type="text" class="form-control form-control-sm" id="myInput" @keyup="searchBar"
+                                    placeholder="Search coin...">
+                                <div class="row">
+                                    <div class="col">
+
+                                        <div class="container mt-3">
+
+                                            <table id="myTable" class="table table-sm table-bordered"
+                                                style="border-color:rgb(215, 205, 221); color: rgb(215, 205, 221)">
+
+                                                <thead class="header text-center">
+                                                    <tr>
+                                                        <th scope="col">Rank</th>
+                                                        <th style="text-align: justify ;" scope="col">
+                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Coin</th>
+                                                        <th scope="col">Symbol</th>
+                                                        <th scope="col">Price</th>
+                                                        <th scope="col">24h</th>
+                                                        <th scope="col">7d</th>
+                                                        <th scope="col">30d</th>
+                                                        <th scope="col">Mrk Cap</th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody style='text-align: center; vertical-align: middle;'>
+
+                                                    <tr v-for="coin in allCoins">
+                                                        <!-- RANK -->
+                                                        <th scope="row">[[ coin.market_cap_rank ]] </th>
+                                                        <!-- COIN -->
+                                                        <td style="text-align: justify ;">&nbsp;&nbsp;&nbsp;<img
+                                                                :src='[[ coin.image]]'
+                                                                style="width: auto; height: 30px;"> [[ coin.name ]]</td>
+                                                        <!-- SYMBOL -->
+                                                        <td>[[ coin.symbol.toUpperCase()]]</td>
+                                                        <!-- PRICE -->
+                                                        <td>
+                                                            <div v-if="coin.current_price >= 500">$[[
+                                                                coin.current_price.toLocaleString(undefined, {
+                                                                minimumFractionDigits: 0, maximumFractionDigits: 0 }) ]]
+                                                            </div>
+                                                            <div v-else-if="coin.current_price >= 0.10">$[[
+                                                                coin.current_price.toLocaleString(undefined, {
+                                                                minimumFractionDigits: 2, maximumFractionDigits: 2 }) ]]
+                                                            </div>
+                                                            <div v-else-if="coin.current_price >= 0.010">$[[
+                                                                coin.current_price.toFixed(3) ]] </div>
+                                                            <div v-else-if="coin.current_price >= 0.0010">$ [[
+                                                                coin.current_price.toFixed(4) ]]</div>
+                                                            <div v-else-if="coin.current_price >= 0.00010">$[[
+                                                                coin.current_price.toFixed(5) ]]</div>
+                                                            <div v-else-if="coin.current_price >= 0.000010">$ [[
+                                                                coin.current_price.toFixed(6) ]]</div>
+                                                            <div v-else-if="coin.current_price >= 0.0000010">$ [[
+                                                                coin.current_price.toFixed(7) ]]</div>
+                                                            <div v-else=""> $ [[ coin.current_price ]]</div>
+                                                        </td>
+                                                        <!-- 24H -->
+                                                        <td>[[
+                                                            parseFloat(coin.price_change_percentage_24h_in_currency).toFixed(1)
+                                                            ]]%</td>
+                                                        <!-- 7D -->
+                                                        <td>[[
+                                                            parseFloat(coin.price_change_percentage_7d_in_currency).toFixed(1)
+                                                            ]]%</td>
+                                                        <!-- 30D -->
+                                                        <td>[[
+                                                            parseFloat(coin.price_change_percentage_30d_in_currency).toFixed(1)
+                                                            ]]%</td>
+                                                        <!-- MRK CAP -->
+                                                        <td>$[[ coin.market_cap.toLocaleString(undefined, {
+                                                            minimumFractionDigits: 0, maximumFractionDigits: 0 }) ]]
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end of first card -->
+                            <!-- second card -->
+                            <div class="tab-pane fade show" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-1">
+                                <div class="row">
+                                    <div class="col">
+
+                                        <div class="container mt-3">
+
+
+                                            <table class="table table-bordered table-hover"
+                                                style="border-color:rgb(215, 205, 221); color: rgb(215, 205, 221)">
+
+                                                <thead class="header text-center">
+                                                    <tr>
+                                                        <th scope="col">Score</th>
+                                                        <th style="text-align: justify ;" scope="col">
+                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Coin</th>
+                                                        <th scope="col">Symbol</th>
+                                                        <th scope="col">Price</th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody v-for="coin in trending"
+                                                    style='text-align: center; vertical-align: middle;'>
+
+                                                    <tr class=" table-row" style="cursor:pointer ;">
+                                                       
+                                                            <!-- RANK -->
+                                                            <th scope="row"> 
+                                                                <a class='theonething' :href=`https://www.coingecko.com/en/coins/${[[coin.item.id]]}`>[[ coin.item.score + 1 ]]
+                                                                </a>
+                                                            
+                                                            </th>
+                                                            <!-- COIN -->
+                                                            <td style="text-align: justify ;">&nbsp;&nbsp;&nbsp;<img
+                                                                    :src='[[ coin.item.small]]'
+                                                                    style="width: auto; height: 30px;"> [[
+                                                                coin.item.name ]]</td>
+                                                            <!-- SYMBOL -->
+                                                            <td>[[ coin.item.symbol ]]</td>
+                                                            <!-- PRICE -->
+                                                            <td>$[[ coin.item.usd_price ]]</td>
+                                                     
+
+
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end of second card -->
+
+                        </div>
+                        <!-- end of cards content -->
+                    </div>
+
+                    <!-- end of cards beginning of cards -->
+
+                </div>
+                <!--end of content after navbar -->
+            </div>
+            <!-- end of page content -->
+        </div>
+    </div>
+    <!-- end of vue.js -->
+    {% else %}
+    <!-- modal login/signup  -->
+
+
+
+
+
+
+
+
+
+    <div class="centerbutton">
+        <button type="button" class="leobutton" data-bs-toggle="modal" data-bs-target="#loginModal">Enter App</button>
+    </div>
+    <!-- login modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded border leo">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginToggleLabel">WELCOME</h5>
+                </div>
+                <div class="modal-body">
+                    <form action="/login/" method="post">
+                        {% csrf_token %}
+                        <p>
+                            <label for="id_username">Username:</label>
+                            <input type='text' name='username' autofocus autocapitalize="none" autocomplete="username"
+                                id="id_username" maxlength="150" required>
+                        </p>
+                        <hr>
+                        <p>
+                            <label for="id_password">Password:</label>
+                            <input type='password' name='password' autocomplete="current-password" id="id_password"
+                                required>
+                        </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="leobutton">Login</button>
+                    </form>
+                    <button class="leobutton" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Sign
+                        Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end of login modal -->
+    <!-- signup modal -->
+    <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+        tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalToggleLabel2">Sign Up</h5>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" value="Sign Up" class="leobutton">Sign Up</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end of signup modal -->
+    <!--end of modal login/signup  -->
+    {% endif %}
+    <!-- end of authetification -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- scripts -->
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <!-- <script src="https://code.highcharts.com/stock/modules/data.js"></script>
+<script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/stock/modules/export-data.js"></script> -->
+
+
+
+
+
+    <script src="/static/js/market.js"></script>
+    <script>
+        var el = document.getElementById("wrapper");
+        var toggleButton = document.getElementById("menu-toggle");
+        toggleButton.onclick = function () {
+            el.classList.toggle("toggled");
+        };
+
+    </script>
+
+    <script>
+// function myFunction() {
+//   var input, filter, table, tr, td, i, txtValue;
+//   input = document.getElementById("myInput");
+//   filter = input.value.toUpperCase();
+//   table = document.getElementById("myTable");
+//   tr = table.getElementsByTagName("tr");
+//   for (i = 0; i < tr.length; i++) {
+//     td = tr[i].getElementsByTagName("td")[0];
+//     if (td) {
+//       txtValue = td.textContent || td.innerText;
+//       if (txtValue.toUpperCase().indexOf(filter) > -1) {
+//         tr[i].style.display = "";
+//       } else {
+//         tr[i].style.display = "none";
+//       }
+//     }       
+//   }
+// }
+    </script>
+
+    <!-- end of scripts -->
+</body>
+<footer></footer>
+
+</html>

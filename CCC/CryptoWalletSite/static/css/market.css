@@ -106,9 +106,9 @@
     background: linear-gradient(135deg, #312a6c, #852d91);
     font-size: 22px;
     font-weight: 500;
-    padding: 10px 20px;
+    padding: 5px 20px;
     border: none;
-    border-radius: 15px;
+    border-radius: 25px;
     overflow: hidden;
     position: relative;
     transition: all 0.3s cubic-bezier(0.02, 0.01, 0.47, 1);
@@ -169,7 +169,7 @@ background-color: transparent;
     #000000,
     #190322,
     #240530,
-    #230530
+    #230530,
     );
     color: var(--second-text-color);
 
@@ -235,3 +235,16 @@ background-color: transparent;
     width: 10%;
 }
 
+
+input[type="text"], textarea{
+    width: 15%;
+    color: rgb(215, 205, 221);
+    background: transparent;
+    outline: 0.2px  rgb(215, 205, 221);
+    box-shadow: 0 0 5px rgb(215, 205, 221);
+}
+
+.theonething {
+    text-decoration: none;
+    color:#fff;
+}

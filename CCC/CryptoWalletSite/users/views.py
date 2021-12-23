@@ -36,10 +36,10 @@ def SignIN(request):
 
     return redirect('home')
 
-class CompareWithForm(CreateView):
+class MarketWithForm(CreateView):
     form_class = CustomUserCreationForm
-    success_url = reverse_lazy('compare')
-    template_name = 'compare.html'
+    success_url = reverse_lazy('market')
+    template_name = 'market.html'
 
 class NewsWithForm(CreateView):
     form_class = CustomUserCreationForm
