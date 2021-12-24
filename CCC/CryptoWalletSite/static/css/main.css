@@ -1,9 +1,9 @@
 :root {
 
     --main-bg-color: #22042e;
-    --main-text-color: rgb(215, 205, 221);
-    --second-text-color: rgb(215, 205, 221);
-    --second-bg-color: #784ffe;
+    --main-text-color: white;
+    --second-text-color: white;
+    --second-bg-color: #874c8d;
 }
 
 .primary-text {
@@ -26,7 +26,7 @@
     border-radius: 100%;
 }
 
-#wrapper {
+#wrapper, #sticky-footer {
     overflow-x: hidden;
     background-image: linear-gradient(
     to right,
@@ -235,3 +235,10 @@ background-color: transparent;
     width: 10%;
 }
 
+.theimput[type="text"], textarea{
+    width: 15%;
+    color: rgb(215, 205, 221);
+    background: transparent;
+    outline: 0.2px  rgb(215, 205, 221);
+    box-shadow: 0 0 5px rgb(215, 205, 221);
+}
