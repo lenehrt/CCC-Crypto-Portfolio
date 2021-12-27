@@ -1,13 +1,10 @@
 const vm = new Vue({
     el: "#app",
     delimiters: ['[[', ']]'],
+    
     data: {
         allCoins: [],
         trending: [],
-    },
-    
-    created: function(){
-        this.loadCoins()
     },
     
     methods: {
@@ -177,7 +174,10 @@ const vm = new Vue({
             }
         },
 
+    },
 
-    }, //end of methods
+    created: function(){
+        this.loadCoins()
+    },
 
-}) // end of vue app
+})

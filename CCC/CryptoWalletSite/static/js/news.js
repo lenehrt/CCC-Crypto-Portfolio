@@ -1,15 +1,13 @@
 const vm = new Vue({
     el: "#app",
     delimiters: ['[[', ']]'],
+
     data: {
         newsArt: [],
+    },
 
-    },
-    created: function(){
-        this.loadNews()
-    },
-    
     methods: {
+
         loadNews: function() {
                 axios({
                 method: 'get',
@@ -20,6 +18,10 @@ const vm = new Vue({
             })
         },
 
-    }, //end of methods
+    },
 
-}) // end of vue app
+    created: function(){
+        this.loadNews()
+    },
+
+})
