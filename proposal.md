@@ -1,9 +1,9 @@
 CryptoWallet
 by Leonardo De Oliveira (Lenehrt)
 
-My project is a website application where users can access their Etherium Wallets. The app will allow users to see all crypto coins and transactions associated with each connected Etherium based wallet in their account. The app will also provide data and information about the top crypto markets. The goal is to help users access updated investments information in one place, allowing them to make their investment decisions based on the latest trends and news.
+My project is a website application where users can access their Ethereum Wallets. The app will allow users to see all crypto coins and transactions associated with each connected Ethereum based wallet in their account. The app will also provide data and information about the top crypto markets. The goal is to help users access updated investments information in one place, allowing them to make their investment decisions based on the latest trends and news.
 
-The project will use Django Rest Framework to create a database allowing the user to create a user interface account. Using Vue.js, the application will collect data from the web browser ETH wallet (MetaMask). The Vue.js will send API requests to ZAPPER.fi and download data from the user imputed wallet with the wallet address. The HTML will display all coins available in the wallet multiplied by the USD dollar value. An API request to CoinGecko will collect updated USD prices for each currency.
+The project will use Django Rest Framework to create a database allowing the user to create a user interface account. Using Vue.js, the application will collect data from the web browser ETH wallet (MetaMask). The Vue.js will send API requests to ZAPPER.fi and download data from the user imputed wallet with the wallet address. The HTML will display all coins available in the wallet multiplied by the USD dollar value. An API request to Coin Gecko will collect updated USD prices for each currency.
 
 The website will start with a Login page. The user will need to log in or create an account. A MetaMask wallet connects button will appear on the first-time user access page.
 
